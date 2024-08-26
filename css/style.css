@@ -7,6 +7,7 @@
     --green-color: #22C55E;
     --red-color: #F44336;
     --yellow-color: #e9c424;
+    --scrollbar-thumb-menu-color: #ff000040;
 }
 /* Variables  */
 
@@ -18,6 +19,10 @@
 body {
     font-family: system-ui;
     background-color: #F1F5F9;
+}
+
+a {
+    text-decoration: none;
 }
 
 .widget {
@@ -95,6 +100,7 @@ body {
 
 /* Start Match Stats  */
 
+/* Start Container  */
 .container {
     margin-top: 100px;
     margin-left: auto;
@@ -121,6 +127,8 @@ body {
         width: 1170px;
     }
 }
+
+/* End Container  */
 
 .head-title {
     letter-spacing: .75px;
@@ -160,7 +168,7 @@ body {
 
 .insert-data .pop-menu {
     width: 350px;
-    height: 300px;
+    max-height: 300px;
     border-radius: 8px;
     z-index: 1000;
     box-shadow: 0px 0px 10px #999;
@@ -170,6 +178,17 @@ body {
     transform: translate(-50%,-50%);
     background: #ff000017;
     display: none;
+    overflow-y: auto;
+    transition: var(--main-transition);
+}
+
+.insert-data .pop-menu::-webkit-scrollbar {
+    background-color: transparent;
+}
+
+.insert-data .pop-menu::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-menu-color);
+    border-radius: 8px;
 }
 
 .insert-data .pop-menu .set-time {
@@ -195,6 +214,25 @@ body {
     transition: var(--main-transition);
 }
 
+.insert-data .pop-menu .cancel-menu {
+    transition: var(--main-transition);
+}
+
+.insert-data .pop-menu .cancel-menu:hover {
+    color: var(--red-color);
+}
+
+.insert-data .pop-menu .save-changes {
+    right: 40px;
+    top: 12px;
+    font-size: 20px;
+    transition: var(--main-transition);
+}
+
+.insert-data .pop-menu .save-changes:hover {
+    color: var(--blue-color);
+}
+
 .insert-data .pop-menu .set-time:focus-within::before {
     opacity: 1;
 } 
@@ -205,16 +243,14 @@ body {
     padding: 5px;
     border-radius: 8px;
     border: 1px solid #ccc;
+    background-color: transparent;
 }
 
 .insert-data .player-data img {
     width: 45px;
 }
 
-.insert-data .player-data .goal-insert::after {
-    content: "\f017";
-    font-weight: 400;
-    font-family: "Font Awesome 6 Free";
+.insert-data .player-data .goal-insert span {
     position: absolute;
     left: 50%;
     top: 62%;
@@ -263,6 +299,21 @@ body {
     cursor: pointer;
 }
 
+.save-all {
+    transition: var(--main-transition);
+}
+
+.save-all:hover {
+    background-color: #0064d7;
+}
+
+.add-player {
+    transition: var(--main-transition);
+}
+
+.add-player:hover {
+    background-color: #1cac51;
+}
 
 
 /* End Match Stats  */
