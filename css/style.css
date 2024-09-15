@@ -25,79 +25,6 @@ a {
     text-decoration: none;
 }
 
-.widget {
-    width: 700px;
-    background-color: #333;
-    margin: 30px auto;
-    color: #E8E8E8;
-    padding: 30px 20px 30px;
-    transform: translateY(50%) scale(1.8);
-}
-
-.widget .tournament{
-    font-weight: 500;
-    margin-bottom: 10px;
-}
-
-.widget .result{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 0 30px;
-    border-bottom: 1px solid #bbb;
-    margin-bottom: 25px;
-}
-
-.widget .result .team{
-    text-align: center;
-}
-
-.widget .result .team img{
-    width: 75px;
-    border-radius: 50%;
-    margin-bottom: 10px;
-}
-
-.widget .result .team h2{
-    font-weight: normal;
-    text-transform: capitalize;
-}
-
-.widget .result .goals{
-    font-size: 50px;
-    align-self: flex-start;
-    font-weight: 400;
-}
-
-.widget .result .time {
-    gap: 5px;
-    display: flex;
-    flex-direction: column;
-    font-size: 20px;
-    align-self: flex-start;
-    text-align: center;
-}
-
-.widget .owners{
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-}
-
-.widget .owners p {
-    color: #ddd;
-}
-.widget .owners p:not(:last-child){
-    margin-bottom: 5px;
-}
-.widget .owners i{
-    position: absolute;
-    left: 50%;
-    top: 14.4px;
-    transform: translate(-50%,-50%);
-}
-
-
 /* Start Match Stats  */
 
 /* Start Container  */
@@ -105,8 +32,8 @@ a {
     margin-top: 100px;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
  /* Small screen  */
@@ -317,3 +244,98 @@ a {
 
 
 /* End Match Stats  */
+
+
+/* Start Match Results */
+
+.result {
+    background: #607d8b26;
+    padding: 15px;
+    box-shadow: 0 0 10px #ddd;
+    border-radius: 8px;
+}
+
+.result .league{
+    margin-bottom: 15px;
+    text-transform: capitalize;
+    color: #123456;
+}
+
+.result .results {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px 0 20px 0;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px 0 #2531364f;
+    margin-bottom: 20px;
+}
+
+.result .results .team1-result{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.result .results .team2-result{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex-direction: row-reverse;
+}
+
+.result .results .time{
+    display: flex;
+    flex-direction: column;
+    padding: 0 50px;
+    gap: 5px;
+    letter-spacing: .5px;
+    font-weight: 300;
+}
+
+@media (max-width:767px) {
+    .result .results .time {
+        padding: 0 20px;
+    }
+}
+
+.result .results .team1-result span,
+.result .results .team2-result span{
+    font-size: 40px;
+}
+
+.result .results img{
+    width: 120px;
+    border-radius: 30%;
+}
+
+@media (max-width:767px) {
+    .result .results img {
+        width: 50px;
+    }
+}
+
+.result .soccers{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    padding: 10px 0 15px 0;
+}
+
+.result .soccers i{
+    padding: 0 50px;
+}
+
+.team1-soccers,
+.team2-soccers {
+    width: 40%;
+}
+
+@media (max-width:767px) {
+    .team1-soccers,
+    .team2-soccers {
+        font-size: 15px;
+    }
+}
+
+/* End Match Results */

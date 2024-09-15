@@ -3,6 +3,54 @@ let playerDataElements = window.document.querySelectorAll(".player-data");
 let mainListOfGols = [];
 let scoringPlayerAndTeam = [];
 
+function howIsThis(player) {
+    for (let i = 0 ; i < scoringPlayerAndTeam.length ; ++i)
+        if (scoringPlayerAndTeam[i].slice(-1) == player)
+            return scoringPlayerAndTeam[i][0];
+}
+function howIsMyTeam(player) {
+    for (let i = 0 ; i < scoringPlayerAndTeam.length ; ++i) {
+        if (scoringPlayerAndTeam[i].slice(-1) == player)
+            return scoringPlayerAndTeam[i][1];
+    }
+}
+function goalsOfTeam(team) {
+    let result = 0;
+    for (let i = 1 ; i < team.length ; ++i) {
+        result += team[i].slice(1).length
+    }
+    return result
+}
+function setSoccers(team) {
+    let containerGoals;
+    team[0] === "team1" 
+    ? (containerGoals = document.querySelector(".team1-soccers")) 
+    : (containerGoals = document.querySelector(".team2-soccers"));
+    
+    for (let i = 1 ; i < team.length ; ++i) {
+        let player = document.createElement("p");
+        team[i].length == 2
+        ? player.append(`${team[i][0]} ${team[i].slice(1).map(num => `${num}' `).join()}`)
+        : player.append(`${team[i][0]} (${team[i].slice(1).map(num => `${num}' `).join()})`);
+        containerGoals.append(player)
+    }
+}
+function setAllData(){
+    let team1Result = ["team1"],team2Result = ["team2"];
+    for (let i = 0 ; i < mainListOfGols.length ; ++i) {
+        let heplerList = [];
+        heplerList = heplerList.concat(howIsThis(mainListOfGols[i][0]),mainListOfGols[i].slice(1));
+        if (howIsMyTeam(mainListOfGols[i][0]) === "team1") team1Result.push(heplerList)
+        else team2Result.push(heplerList)
+    }
+    // Set The Goals In The Page
+    document.querySelector(".result .results .team1-result span").textContent = goalsOfTeam(team1Result)
+    document.querySelector(".result .results .team2-result span").textContent = goalsOfTeam(team2Result)
+
+    // Set The Sccoring Players  // 
+    setSoccers(team1Result);
+    setSoccers(team2Result);
+};
 function removeChildsByClassName(parent,className) {
     let child = parent.children[0];
     while(child) {
@@ -14,14 +62,14 @@ function removeChildsByClassName(parent,className) {
             child = child.nextElementSibling;
         }
     }
-}
+};
 function deletItemFromArray(array,index) {
     let newArray = [];
     for (i in array) {
         if (i != index) newArray.push(array[i]);
     }
     return newArray;
-}
+};
 
 document.addEventListener("focusout",function(ev){
     if (ev.target.type === "number"){
@@ -105,7 +153,7 @@ window.document.querySelector(".insert-data .pop-menu .save-changes").onclick = 
 
 // Collect And Range All Data
 
-window.document.getElementsByClassName("save-all")[0].addEventListener("click",function() {
+window.document.getElementsByClassName("save-all")[0].addEventListener("click",function(event) {
     for (let i = 0 ; i < playerDataElements.length ; ++i) {
         let playerData = []
         if (playerDataElements[i].firstElementChild.nextElementSibling.firstElementChild.value !== "0" &&
@@ -113,7 +161,11 @@ window.document.getElementsByClassName("save-all")[0].addEventListener("click",f
         ) {
             playerData.push(playerDataElements[i].firstElementChild.textContent);
             playerData.push(window.document.querySelector(`input[name = 'player${i+1}-team']:checked`).value);
+            playerData.push(`Player${i+1}`)
             scoringPlayerAndTeam.push(playerData);
         }
     }
+    document.querySelector(".match-form").remove();
+    document.querySelector(".match-result").style.display = "block";
+    setAllData();
 })
