@@ -242,6 +242,85 @@ a {
     background-color: #1cac51;
 }
 
+.insert-data .add-player-menu {
+    width: 350px;
+    max-height: 300px;
+    border-radius: 8px;
+    z-index: 1000;
+    box-shadow: 0px 0px 10px #999;
+    padding: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #ff000017;
+    display: none;
+    overflow-y: auto;
+    transition: var(--main-transition);
+}
+
+.insert-data .add-player-menu::-webkit-scrollbar {
+    background-color: transparent;
+}
+
+.insert-data .add-player-menu::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-menu-color);
+    border-radius: 8px;
+}
+
+.insert-data .add-player-menu .set-name {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+}
+
+.insert-data .add-player-menu .set-name::before {
+    content: "\f007";
+    font-weight: 400;
+    font-family: "Font Awesome 6 Free";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-right: 5px;
+    opacity: .5;
+    transition: var(--main-transition);
+}
+
+.insert-data .add-player-menu .cancel-adding {
+    transition: var(--main-transition);
+}
+
+.insert-data .add-player-menu .cancel-adding:hover {
+    color: var(--red-color);
+}
+
+.insert-data .add-player-menu .save-player {
+    right: 40px;
+    top: 12px;
+    font-size: 20px;
+    transition: var(--main-transition);
+}
+
+.insert-data .add-player-menu .save-player:hover {
+    color: var(--blue-color);
+}
+
+.insert-data .add-player-menu .set-name:focus-within::before {
+    opacity: 1;
+} 
+
+.insert-data .add-player-menu .set-name input {
+    display: block;
+    width: 150px;
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: transparent;
+}
 
 /* End Match Stats  */
 
@@ -329,6 +408,7 @@ a {
 .team1-soccers,
 .team2-soccers {
     width: 40%;
+    text-align: center;
 }
 
 @media (max-width:767px) {

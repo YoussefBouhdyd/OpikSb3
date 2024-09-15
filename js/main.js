@@ -1,7 +1,14 @@
+// Check from Local Storage
+if (localStorage.players) {
+    for (let i = 0 ; i < localStorage.players.split(",").length ; ++i) {
+        addPlayer(localStorage.players.split(",")[i])
+    }
+}
+
 let menu =  window.document.querySelector(".pop-menu");
-let playerDataElements = window.document.querySelectorAll(".player-data");
 let mainListOfGols = [];
 let scoringPlayerAndTeam = [];
+let players = [];
 
 function howIsThis(player) {
     for (let i = 0 ; i < scoringPlayerAndTeam.length ; ++i)
@@ -70,6 +77,18 @@ function deletItemFromArray(array,index) {
     }
     return newArray;
 };
+function addPlayer(name) {
+    document.querySelector(".no-player").style.display = "none";
+    let newPlayer = document.querySelector(".player-data-template").cloneNode(true);
+    newPlayer.style.display = "table-row";
+    newPlayer.className = "player-data";
+    newPlayer.firstElementChild.textContent = name;
+
+    newPlayer.querySelector(".goal-insert").id = `Player${document.getElementsByTagName("tbody")[0].children.length - 2}`;
+    newPlayer.querySelectorAll("[type = radio]")[0].name = `player${document.getElementsByTagName("tbody")[0].children.length - 2}-team`
+    newPlayer.querySelectorAll("[type = radio]")[1].name = `player${document.getElementsByTagName("tbody")[0].children.length - 2}-team`
+    document.querySelector("tbody").append(newPlayer);
+}
 
 document.addEventListener("focusout",function(ev){
     if (ev.target.type === "number"){
@@ -150,10 +169,10 @@ window.document.querySelector(".insert-data .pop-menu .save-changes").onclick = 
     }
 }
 
-
 // Collect And Range All Data
 
 window.document.getElementsByClassName("save-all")[0].addEventListener("click",function(event) {
+    let playerDataElements = window.document.querySelectorAll(".player-data");
     for (let i = 0 ; i < playerDataElements.length ; ++i) {
         let playerData = []
         if (playerDataElements[i].firstElementChild.nextElementSibling.firstElementChild.value !== "0" &&
@@ -169,3 +188,28 @@ window.document.getElementsByClassName("save-all")[0].addEventListener("click",f
     document.querySelector(".match-result").style.display = "block";
     setAllData();
 })
+
+// click on adding player
+document.querySelector(".add-player").onclick = function () {
+    window.document.querySelector(".insert-data table").style.filter = "blur(10px)";
+    document.querySelector(".insert-data .add-player-menu").style.display = "block";
+}
+
+// cancel adding player
+window.document.querySelector(".cancel-adding").onclick = function() {
+    window.document.querySelector(".insert-data table").style.filter = "blur(0px)"
+    document.querySelector(".insert-data .add-player-menu").style.display = "none"
+}
+
+// add player to Table
+window.document.querySelector(".save-player").onclick = function() {
+    addPlayer(document.querySelector(".set-name").lastElementChild.value);
+
+    // Start adding to lacal Storage
+    players.push(document.querySelector(".set-name").lastElementChild.value)
+    localStorage.players = players;
+    // end adding to local Storage 
+
+    window.document.querySelector(".insert-data table").style.filter = "blur(0px)"
+    document.querySelector(".insert-data .add-player-menu").style.display = "none"
+}
