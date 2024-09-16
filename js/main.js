@@ -58,6 +58,15 @@ function setAllData(){
     // Set The Sccoring Players  // 
     setSoccers(team1Result);
     setSoccers(team2Result);
+
+    // Set The Time
+    let today = new Date();
+    let formatedDate = today.toLocaleDateString('en-US', {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric'
+    });
+    document.querySelector(".time").lastElementChild.textContent = formatedDate;
 };
 function removeChildsByClassName(parent,className) {
     let child = parent.children[0];
@@ -176,7 +185,6 @@ window.document.querySelector(".insert-data .pop-menu .save-changes").onclick = 
 }
 
 // Collect And Range All Data
-
 window.document.getElementsByClassName("save-all")[0].addEventListener("click",function(event) {
     let playerDataElements = window.document.querySelectorAll(".player-data");
     for (let i = 0 ; i < playerDataElements.length ; ++i) {
@@ -232,3 +240,4 @@ window.document.addEventListener("click",function(event) {
         localStorage.players = players;
     }
 })
+
