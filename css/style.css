@@ -173,6 +173,20 @@ a {
     background-color: transparent;
 }
 
+.insert-data .player-data {
+    position: relative;
+}
+
+.insert-data .player-data  .delete-player {
+    cursor: pointer;
+    font-size: 13px;
+    transition: .3s linear;
+}
+
+.insert-data .player-data  .delete-player:hover {
+    color: var(--red-color);
+}
+
 .insert-data .player-data img {
     width: 45px;
 }
@@ -252,7 +266,7 @@ a {
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    background: #ff000017;
+    background: #00a2ff17;
     display: none;
     overflow-y: auto;
     transition: var(--main-transition);

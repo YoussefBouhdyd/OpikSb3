@@ -1,14 +1,15 @@
+let players = [];
 // Check from Local Storage
 if (localStorage.players) {
     for (let i = 0 ; i < localStorage.players.split(",").length ; ++i) {
         addPlayer(localStorage.players.split(",")[i])
+        players.push(localStorage.players.split(",")[i])
     }
 }
 
 let menu =  window.document.querySelector(".pop-menu");
 let mainListOfGols = [];
 let scoringPlayerAndTeam = [];
-let players = [];
 
 function howIsThis(player) {
     for (let i = 0 ; i < scoringPlayerAndTeam.length ; ++i)
@@ -88,6 +89,11 @@ function addPlayer(name) {
     newPlayer.querySelectorAll("[type = radio]")[0].name = `player${document.getElementsByTagName("tbody")[0].children.length - 2}-team`
     newPlayer.querySelectorAll("[type = radio]")[1].name = `player${document.getElementsByTagName("tbody")[0].children.length - 2}-team`
     document.querySelector("tbody").append(newPlayer);
+}
+function removeItemFromList(list,item) {
+    return list
+        .slice(0,list.indexOf(item))
+        .concat(list.slice(list.indexOf(item)+1))
 }
 
 document.addEventListener("focusout",function(ev){
@@ -213,3 +219,16 @@ window.document.querySelector(".save-player").onclick = function() {
     window.document.querySelector(".insert-data table").style.filter = "blur(0px)"
     document.querySelector(".insert-data .add-player-menu").style.display = "none"
 }
+
+// remove a player
+window.document.addEventListener("click",function(event) {
+    if (event.target.classList[2] === "delete-player") {
+        event.target.parentElement.parentElement.remove();
+        players = removeItemFromList(players,event.target.parentElement.parentElement.firstElementChild.textContent);
+        if (players.length === 0) {
+            document.querySelector(".no-player").style.display = "table-row";
+        }
+        // update local storage
+        localStorage.players = players;
+    }
+})
